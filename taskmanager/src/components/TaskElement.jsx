@@ -1,4 +1,5 @@
-import React, { Component } from "react"
+import React, {Component} from "react"
+import Button from "react-bootstrap/Button";
 
 class TaskElement extends Component {
 
@@ -10,6 +11,12 @@ class TaskElement extends Component {
                 draggable={true}
             >
                 <p id={this.props.task.id}>{this.props.task.task}</p>
+                <Button
+                    variant="danger"
+                    onClick={() => this.props.removeTask(this.props.task.id)}
+                >
+                    Delete
+                </Button>
             </div>
         );
     }

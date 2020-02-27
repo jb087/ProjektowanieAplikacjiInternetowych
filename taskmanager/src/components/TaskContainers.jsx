@@ -30,6 +30,7 @@ class TaskContainers extends Component {
                                             formTaskHidden={taskContainer.formTaskHidden}
                                             tasks={this.state.tasks}
                                             addTask={this.addTask}
+                                            removeTask={this.removeTask}
                                         />
                                     </Col>
                                 )
@@ -53,6 +54,12 @@ class TaskContainers extends Component {
     addTask = taskElement => {
         const tasks = [...this.state.tasks].filter(task => !task.id.includes(taskElement.id));
         tasks.push(taskElement);
+
+        this.setState({tasks: tasks});
+    };
+
+    removeTask = taskId => {
+        const tasks = [...this.state.tasks].filter(task => !task.id.includes(taskId));
 
         this.setState({tasks: tasks});
     };
