@@ -4,6 +4,7 @@ import TaskElement from "./TaskElement";
 
 class TaskContainer extends Component {
 
+    //TODO usunąć state do góry
     state = {
         tasks: []
     };

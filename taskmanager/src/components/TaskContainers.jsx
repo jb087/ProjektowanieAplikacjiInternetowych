@@ -6,21 +6,29 @@ import Container from "react-bootstrap/Container";
 
 class TaskContainers extends Component {
 
+    state = {
+        taskContainers: [
+            {id: "todoTasksId", title: "ToDo Tasks", formTaskHidden: "false", tasks: []},
+            {id: "doneTasksId", title: "Done Tasks", formTaskHidden: "true", tasks: []}
+        ]
+    };
+
     render() {
         return (
             <div>
                 <Container>
                     <Row>
-                        <Col><TaskContainer
-                            title="ToDo Tasks"
-                            formTaskHidden="false"
-                        />
-                        </Col>
-                        <Col><TaskContainer
-                            title="Done Tasks"
-                            formTaskHidden="true"
-                        />
-                        </Col>
+                        {this.state.taskContainers
+                            .map(taskContainer =>
+                                <Col>
+                                    <TaskContainer
+                                        id={taskContainer.id}
+                                        title={taskContainer.title}
+                                        formTaskHidden={taskContainer.formTaskHidden}
+                                        tasks={taskContainer.tasks}
+                                    />
+                                </Col>
+                            )}
                     </Row>
                 </Container>
             </div>
