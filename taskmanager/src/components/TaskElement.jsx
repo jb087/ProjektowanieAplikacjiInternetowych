@@ -15,12 +15,7 @@ class TaskElement extends Component {
     }
 
     dragStart = event => {
-        const target = event.target;
         event.dataTransfer.setData("taskElementId", this.props.task.id);
-
-        setTimeout(() => {
-            target.style.display = "none"
-        }, 0);
     };
 
     dragOver = event => {
