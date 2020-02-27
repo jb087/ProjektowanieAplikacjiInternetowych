@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import { v1 as uuidv1 } from "uuid"
+import {v1 as uuidv1} from "uuid"
 
 class FormTask extends Component {
 
@@ -33,8 +33,9 @@ class FormTask extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.props.onSubmit({
+            id: uuidv1(),
             task: this.state.task,
-            id: uuidv1()
+            taskContainerId: this.props.taskContainerId
         });
         this.setState({task: ""})
     };

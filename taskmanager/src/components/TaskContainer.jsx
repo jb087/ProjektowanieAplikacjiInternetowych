@@ -4,11 +4,6 @@ import TaskElement from "./TaskElement";
 
 class TaskContainer extends Component {
 
-    //TODO usunąć state do góry
-    state = {
-        tasks: []
-    };
-
     render() {
         return (
             <div
@@ -17,15 +12,21 @@ class TaskContainer extends Component {
             >
                 <h1>{this.props.title}</h1>
                 {
-                    this.state.tasks
+                    this.props.tasks
+                        .filter(task => task.taskContainerId === this.props.id)
                         .map(task =>
                             <TaskElement
                                 key={task.id}
                                 task={task}
                             />)
                 }
-                {this.props.formTaskHidden === "false" &&
-                    <FormTask onSubmit={this.addTask} hidden={this.props.formTaskHidden}/>
+                {
+                    this.props.formTaskHidden === "false" &&
+                    <FormTask
+                        taskContainerId={this.props.id}
+                        onSubmit={this.props.addTask}
+                        hidden={this.props.formTaskHidden}
+                    />
                 }
             </div>
         );
@@ -38,28 +39,15 @@ class TaskContainer extends Component {
         const taskElement = document.getElementById(taskElementId);
         taskElement.style.display = "block";
 
-        this.removeTask(taskElementId);
-
-        this.addTask({
+        this.props.addTask({
+            id: taskElementId,
             task: taskElement.innerHTML,
-            id: taskElementId
+            taskContainerId: this.props.id
         })
     };
 
     dragOver = event => {
         event.preventDefault();
-    };
-
-    addTask = task => {
-        const tasks = [...this.state.tasks];
-        tasks.push(task);
-        this.setState({tasks: tasks});
-    };
-
-    removeTask = taskId => {
-        const tasks = [...this.state.tasks].filter(task => !task.id.includes(taskId));
-        this.setState({tasks: tasks});
-        console.log(this.state.tasks);
     };
 }
 
