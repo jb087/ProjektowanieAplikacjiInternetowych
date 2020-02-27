@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import FormTask from "./components/FormTask"
+import TaskContainer from "./components/TaskContainer";
 
 function App() {
     return (
         <div className="App">
-            <FormTask/>
+            <TaskContainer title="ToDo Tasks"/>
         </div>
     );
 }

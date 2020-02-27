@@ -30,6 +30,7 @@ class FormTask extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        this.props.onSubmit(this.state.task);
     };
 
     handleChange = event => {
