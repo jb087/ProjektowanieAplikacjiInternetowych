@@ -2,11 +2,12 @@ import React, {Component} from "react"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
+import { v1 as uuidv1 } from "uuid"
 
 class FormTask extends Component {
 
     state = {
-        task: null
+        task: ""
     };
 
     render() {
@@ -18,6 +19,7 @@ class FormTask extends Component {
                             required
                             name="task"
                             type="text"
+                            value={this.state.task}
                             placeholder="Task"
                             onChange={this.handleChange}
                         />
@@ -30,7 +32,11 @@ class FormTask extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.onSubmit(this.state.task);
+        this.props.onSubmit({
+            task: this.state.task,
+            id: uuidv1()
+        });
+        this.setState({task: ""})
     };
 
     handleChange = event => {

@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import FormTask from "./FormTask";
+import TaskElement from "./TaskElement";
 
 class TaskContainer extends Component {
 
@@ -13,7 +14,7 @@ class TaskContainer extends Component {
                 <h1>{this.props.title}</h1>
                 {
                     this.state.tasks
-                        .map(task => <p>{task}</p>)
+                        .map(task => <TaskElement key={task.id} task={task}/>)
                 }
                 <FormTask onSubmit={this.addTask}/>
             </div>
