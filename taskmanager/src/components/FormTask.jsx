@@ -14,7 +14,7 @@ class FormTask extends Component {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group as={Col} md="4" controlId="validation1">
+                    <Form.Group as={Col} md="8" controlId="validation1">
                         <Form.Control
                             required
                             name="task"
