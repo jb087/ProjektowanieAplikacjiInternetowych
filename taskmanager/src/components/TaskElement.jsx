@@ -1,7 +1,13 @@
 import React, {Component} from "react"
 import Button from "react-bootstrap/Button";
+import TaskElementModalEditor from "./TaskElementModalEditor";
 
 class TaskElement extends Component {
+
+    state = {
+        showModal: false,
+        task: this.props.task
+    };
 
     render() {
         return (
@@ -10,23 +16,49 @@ class TaskElement extends Component {
                 onDragOver={this.dragOver}
                 draggable={true}
             >
-                <p id={this.props.task.id}>{this.props.task.task}</p>
+                <p id={this.state.task.id}>{this.state.task.task}</p>
                 <Button
                     variant="danger"
-                    onClick={() => this.props.removeTask(this.props.task.id)}
+                    onClick={() => this.props.removeTask(this.state.task.id)}
                 >
                     Delete
                 </Button>
+                <Button variant="primary" onClick={this.handleShow}>Edit</Button>
+                <TaskElementModalEditor
+                    showModal={this.state.showModal}
+                    handleClose={this.handleClose}
+                    onSaveChanges={this.onSaveChanges}
+                    task={this.state.task}
+                />
             </div>
         );
     }
 
     dragStart = event => {
-        event.dataTransfer.setData("taskElementId", this.props.task.id);
+        event.dataTransfer.setData("taskElementId", this.state.task.id);
     };
 
     dragOver = event => {
         event.stopPropagation();
+    };
+
+    handleShow = () => {
+        this.setState({showModal: true});
+    };
+
+    handleClose = () => {
+        this.setState({showModal: false});
+    };
+
+    onSaveChanges = newTaskValue => {
+        let task = this.state.task;
+        task.task = newTaskValue;
+        this.props.addTask(task);
+
+        this.setState({
+            showModal: false,
+            task: task
+        });
     };
 }
 

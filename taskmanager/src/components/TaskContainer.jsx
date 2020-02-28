@@ -18,6 +18,7 @@ class TaskContainer extends Component {
                             <TaskElement
                                 key={task.id}
                                 task={task}
+                                addTask={this.props.addTask}
                                 removeTask={this.props.removeTask}
                             />)
                 }
