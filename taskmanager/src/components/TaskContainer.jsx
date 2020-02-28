@@ -14,6 +14,7 @@ class TaskContainer extends Component {
                 {
                     this.props.tasks
                         .filter(task => task.taskContainerId === this.props.id)
+                        .sort((a, b) => this.compareTasks(a, b))
                         .map(task =>
                             <TaskElement
                                 key={task.id}
@@ -33,6 +34,16 @@ class TaskContainer extends Component {
             </div>
         );
     }
+
+    compareTasks = (a, b) => {
+        if (a.task < b.task) {
+            return -1;
+        }
+        if (a.task > b.task) {
+            return 1;
+        }
+        return 0;
+    };
 
     drop = event => {
         event.preventDefault();
