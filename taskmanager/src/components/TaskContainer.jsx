@@ -10,7 +10,7 @@ class TaskContainer extends Component {
                 onDrop={this.drop}
                 onDragOver={this.dragOver}
             >
-                <h1>{this.props.title}</h1>
+                <h1>{this.props.title + ": " + this.taskCount()}</h1>
                 {
                     this.props.tasks
                         .filter(task => task.taskContainerId === this.props.id)
@@ -61,6 +61,12 @@ class TaskContainer extends Component {
 
     dragOver = event => {
         event.preventDefault();
+    };
+
+    taskCount = () => {
+        return this.props.tasks
+            .filter(task => task.taskContainerId === this.props.id)
+            .length;
     };
 }
 
