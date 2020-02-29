@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import FormTask from "./FormTask";
+import TaskForm from "./TaskForm";
 import TaskElement from "./TaskElement";
 
 class TaskContainer extends Component {
@@ -25,7 +25,7 @@ class TaskContainer extends Component {
                 }
                 {
                     this.props.formTaskHidden === "false" &&
-                    <FormTask
+                    <TaskForm
                         taskContainerId={this.props.id}
                         onSubmit={this.props.addTask}
                         hidden={this.props.formTaskHidden}

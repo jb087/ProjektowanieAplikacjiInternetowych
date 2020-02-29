@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import {v1 as uuidv1} from "uuid"
 
-class FormTask extends Component {
+class TaskForm extends Component {
 
     state = {
         task: ""
@@ -47,4 +47,4 @@ class FormTask extends Component {
     };
 }
 
-export default FormTask;
+export default TaskForm;
