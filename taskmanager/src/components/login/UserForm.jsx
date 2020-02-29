@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {Col, Row} from "react-bootstrap";
+import ApiClient from "../../client/ApiClient";
 
 class UserForm extends Component {
 
@@ -16,9 +17,10 @@ class UserForm extends Component {
                 <Col></Col>
                 <Col>
                     <Form onSubmit={this.handleSubmit}>
-                        <Form.Group controlId="validation1">
+                        <Form.Group>
                             <Form.Control
                                 required
+                                id="loginId"
                                 name="login"
                                 type="text"
                                 value={this.state.login}
@@ -27,6 +29,7 @@ class UserForm extends Component {
                             />
                             <Form.Control
                                 required
+                                id="passwordId"
                                 name="password"
                                 type="password"
                                 value={this.state.password}
@@ -48,10 +51,45 @@ class UserForm extends Component {
         this.setState({[name]: value});
     };
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
         event.preventDefault();
-        //TODO
+
+        const data = {
+            login: this.state.login,
+            password: this.state.password
+        };
+
+        const isLogin = this.isLoginForm(this.props.location.pathname);
+        if (isLogin) {
+            await this.validateLoginData(data);
+        } else {
+            await this.validateRegisterData(data);
+        }
     };
+
+    isLoginForm = path => {
+        return path === "/login"
+    };
+
+    async validateLoginData(data) {
+        const isCorrectData = await ApiClient.checkUser(data);
+        if (isCorrectData) {
+            this.props.history.push("/tasks/" + this.state.login);
+            //TODO add route
+        } else {
+            //TODO notification and reset form
+        }
+    }
+
+    async validateRegisterData(data) {
+        const userExists = await ApiClient.userExists(data);
+        if (!userExists) {
+            //TODO register user
+            this.props.history.push("/login");
+        } else {
+            //TODO notification and reset form
+        }
+    }
 }
 
 export default UserForm;
