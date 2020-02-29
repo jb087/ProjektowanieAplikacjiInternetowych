@@ -4,7 +4,7 @@ import {ModalBody, ModalFooter, ModalTitle} from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-class TaskElementModalEditor extends Component {
+class TaskModalEditor extends Component {
 
     state = {
         taskValue: this.props.task.task
@@ -48,4 +48,4 @@ class TaskElementModalEditor extends Component {
     };
 }
 
-export default TaskElementModalEditor;
+export default TaskModalEditor;

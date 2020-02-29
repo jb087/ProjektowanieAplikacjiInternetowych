@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import Button from "react-bootstrap/Button";
-import TaskElementModalEditor from "./TaskElementModalEditor";
+import TaskModalEditor from "./TaskModalEditor";
 
 class TaskElement extends Component {
 
@@ -24,7 +24,7 @@ class TaskElement extends Component {
                     Delete
                 </Button>
                 <Button variant="primary" onClick={this.handleShow}>Edit</Button>
-                <TaskElementModalEditor
+                <TaskModalEditor
                     showModal={this.state.showModal}
                     handleClose={this.handleClose}
                     onSaveChanges={this.onSaveChanges}
