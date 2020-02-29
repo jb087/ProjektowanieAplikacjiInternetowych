@@ -30,6 +30,12 @@ class TaskForm extends Component {
         );
     }
 
+    handleChange = event => {
+        event.preventDefault();
+        const {name, value} = event.currentTarget;
+        this.setState({[name]: value});
+    };
+
     handleSubmit = event => {
         event.preventDefault();
         this.props.onSubmit({
@@ -38,12 +44,6 @@ class TaskForm extends Component {
             taskContainerId: this.props.taskContainerId
         });
         this.setState({task: ""})
-    };
-
-    handleChange = event => {
-        event.preventDefault();
-        const {name, value} = event.currentTarget;
-        this.setState({[name]: value});
     };
 }
 
