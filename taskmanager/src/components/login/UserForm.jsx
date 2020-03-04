@@ -112,7 +112,6 @@ class UserForm extends Component {
         const isCorrectData = await ApiClient.checkUser(data);
         if (isCorrectData) {
             this.props.history.push("/tasks/" + this.state.login);
-            //TODO add route
         } else {
             this.setState({showIncorrectDataAlert: true});
         }

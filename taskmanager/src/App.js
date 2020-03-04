@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import LoginRegistryMenu from "./components/login/LoginRegistryMenu";
 import UserForm from "./components/login/UserForm";
 import {Container} from "react-bootstrap";
+import TaskContainers from "./components/task/TaskContainers";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
             <Router>
                 <Container>
                     <Switch>
+                        <Route path="/tasks/:login" component={TaskContainers} />
                         <Route path="/login" component={UserForm}/>
                         <Route path="/register" component={UserForm}/>
                         <Route path="/" component={LoginRegistryMenu}/>
