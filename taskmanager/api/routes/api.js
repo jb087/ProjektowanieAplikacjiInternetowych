@@ -1,10 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-const mysql = require('mysql');
-const dbConnection = require('../db/dbConnection');
-
-const connection = mysql.createConnection(dbConnection);
+const userService = require('../service/userService');
 
 router.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -16,26 +12,17 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/', function (req, res, next) {
-    connection.connect(function (err) {
-        if (err) {
-            throw err;
-        }
-        console.log("Connected!");
-    });
-
-    res.status(200).json({
-        message: "HelloWorld!"
-    });
+router.post('/check-user', function (req, res, next) {
+    userService.checkUser(res, req.body);
 });
 
-router.post('/check-user', function (req, res, next) {
+router.post('/user-exists', function (req, res, next) {
     //TODO
     console.log(req.body);
     res.status(200).json({response: false});
 });
 
-router.post('/user-exists', function (req, res, next) {
+router.post('/register-user', function (req, res, next) {
     //TODO
     console.log(req.body);
     res.status(200).json({response: false});

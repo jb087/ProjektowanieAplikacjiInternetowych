@@ -6,9 +6,11 @@ const userExistsPath = apiPath + "user-exists/";
 class ApiClient {
 
     static async checkUser(data) {
+        console.log(data);
         return fetch(checkUserPath, {
             method: "POST",
-            body: data
+            body: JSON.stringify(data),
+            headers: {"Content-Type": "application/json"}
         })
             .then(response => response.json())
             .then(json => json.response);
