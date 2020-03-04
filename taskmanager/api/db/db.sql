@@ -1,6 +1,6 @@
 CREATE TABLE `USER` (
 	ID varchar(255),
-    UserName varchar(255) NOT NULL,
+    UserName varchar(255) NOT NULL UNIQUE,
     Password varchar(255) NOT NULL,
     PRIMARY KEY (ID)
 );

@@ -32,7 +32,7 @@ router.get('/', function (req, res, next) {
 router.post('/check-user', function (req, res, next) {
     //TODO
     console.log(req.body);
-    res.status(200).json({response: true});
+    res.status(200).json({response: false});
 });
 
 router.post('/user-exists', function (req, res, next) {
