@@ -17,9 +17,7 @@ router.post('/check-user', function (req, res, next) {
 });
 
 router.post('/user-exists', function (req, res, next) {
-    //TODO
-    console.log(req.body);
-    res.status(200).json({response: false});
+    userService.userExists(res, req.body);
 });
 
 router.post('/register-user', function (req, res, next) {

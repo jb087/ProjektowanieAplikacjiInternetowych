@@ -18,10 +18,15 @@ class ApiClient {
     static async userExists(data) {
         return fetch(userExistsPath, {
             method: "POST",
-            body: data
+            body: JSON.stringify(data),
+            headers: {"Content-Type": "application/json"}
         })
             .then(response => response.json())
             .then(json => json.response);
+    }
+
+    static async registerUser(data) {
+
     }
 }
 

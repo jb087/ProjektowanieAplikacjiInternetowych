@@ -26,3 +26,16 @@ exports.checkUser = (res, requestBody) => {
         res.status(200).json({response: isCorrectData});
     });
 };
+
+exports.userExists = (res, requestBody) => {
+    const user = new User(requestBody.login, requestBody.password);
+    connection.query("SELECT COUNT(*) AS userCount FROM USER WHERE UserName = ?", [user.login],
+        function (err, result, fields) {
+            if (err) {
+                throw err;
+            }
+
+            const userExists = parseInt(result[0].userCount) > 0;
+            res.status(200).json({response: userExists});
+        });
+};
