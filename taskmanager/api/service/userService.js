@@ -1,8 +1,9 @@
+const uuid = require('uuid');
+
 const User = require('../entity/User');
 
 const mysql = require('mysql');
 const dbConnection = require('../db/dbConnection');
-
 const connection = mysql.createConnection(dbConnection);
 
 connection.connect(function (err) {
@@ -37,5 +38,18 @@ exports.userExists = (res, requestBody) => {
 
             const userExists = parseInt(result[0].userCount) > 0;
             res.status(200).json({response: userExists});
+        });
+};
+
+exports.registerUser = (res, requestBody) => {
+    const user = new User(requestBody.login, requestBody.password);
+    const id = uuid.v1();
+    connection.query("INSERT INTO USER (ID, UserName, Password) VALUES (?)", [[id, user.login, user.password]],
+        function (err, result, fields) {
+            if (err) {
+                throw err;
+            }
+
+            res.status(200).json({response: true});
         });
 };

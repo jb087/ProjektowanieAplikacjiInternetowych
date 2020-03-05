@@ -120,7 +120,7 @@ class UserForm extends Component {
     async validateRegisterData(data) {
         const userExists = await ApiClient.userExists(data);
         if (!userExists) {
-            //TODO register user
+            await ApiClient.registerUser(data);
             this.setState({showUserRegisteredAlert: true});
             this.props.history.push("/login");
         } else {
