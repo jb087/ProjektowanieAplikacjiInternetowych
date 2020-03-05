@@ -18,12 +18,12 @@ class TaskElement extends Component {
             >
                 <p id={this.state.task.id}>{this.state.task.task}</p>
                 <Button
-                    variant="danger"
+                    variant="outline-danger"
                     onClick={() => this.props.removeTask(this.state.task.id)}
                 >
                     Delete
                 </Button>
-                <Button variant="primary" onClick={this.handleShow}>Edit</Button>
+                <Button variant="outline-primary" onClick={this.handleShow}>Edit</Button>
                 <TaskModalEditor
                     showModal={this.state.showModal}
                     handleClose={this.handleClose}

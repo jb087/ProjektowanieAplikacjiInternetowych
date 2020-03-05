@@ -24,4 +24,8 @@ router.post('/register-user', function (req, res, next) {
     userService.registerUser(res, req.body);
 });
 
+router.put('/save-tasks/:login', function (req, res, next) {
+    userService.saveTasks(res, req.params.login, req.body);
+});
+
 module.exports = router;

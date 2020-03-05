@@ -3,6 +3,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TaskContainer from "./TaskContainer";
 import Container from "react-bootstrap/Container";
+import {Button} from "react-bootstrap";
+import ApiClient from "../../client/ApiClient";
 
 class TaskContainers extends Component {
 
@@ -36,6 +38,13 @@ class TaskContainers extends Component {
                                 )
                         }
                     </Row>
+                    <Row>
+                        <Col></Col>
+                        <Col>
+                            <Button variant="primary" onClick={this.saveTasks}>Save Tasks</Button>
+                        </Col>
+                        <Col></Col>
+                    </Row>
                 </Container>
             </div>
         );
@@ -62,6 +71,11 @@ class TaskContainers extends Component {
         const tasks = [...this.state.tasks].filter(task => !task.id.includes(taskId));
 
         this.setState({tasks: tasks});
+    };
+
+    saveTasks = () => {
+        const message = ApiClient.saveTasks(this.props.match.params.login, this.state.tasks);
+        //TODO allert z message
     };
 }
 

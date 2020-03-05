@@ -1,8 +1,13 @@
 class User {
 
-    constructor(login, password) {
+    constructor(id, login, password) {
+        this.id = id;
         this.login = login;
         this.password = password;
+    }
+
+    static withoutId(login, password) {
+        return new User("", login, password);
     }
 }
 
