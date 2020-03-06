@@ -32,6 +32,7 @@ class TaskContainers extends Component {
                                             tasks={this.state.tasks}
                                             addTask={this.addTask}
                                             removeTask={this.removeTask}
+                                            login={this.props.match.params.login}
                                         />
                                     </Col>
                                 )
@@ -55,7 +56,6 @@ class TaskContainers extends Component {
     addTask = taskElement => {
         const tasks = [...this.state.tasks].filter(task => !task.id.includes(taskElement.id));
         tasks.push(taskElement);
-        ApiClient.saveTasks(this.props.match.params.login, taskElement);
 
         this.setState({tasks: tasks});
     };

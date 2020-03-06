@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import {v1 as uuidv1} from "uuid"
+import ApiClient from "../../client/ApiClient";
 
 class TaskForm extends Component {
 
@@ -38,11 +39,16 @@ class TaskForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.onSubmit({
+
+        const task = {
             id: uuidv1(),
             task: this.state.task,
             taskContainerId: this.props.taskContainerId
-        });
+        };
+
+        ApiClient.saveTasks(this.props.login, task);
+        this.props.onSubmit(task);
+
         this.setState({task: ""})
     };
 }

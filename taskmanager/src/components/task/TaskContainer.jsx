@@ -29,6 +29,7 @@ class TaskContainer extends Component {
                         taskContainerId={this.props.id}
                         onSubmit={this.props.addTask}
                         hidden={this.props.formTaskHidden}
+                        login={this.props.login}
                     />
                 }
             </div>
