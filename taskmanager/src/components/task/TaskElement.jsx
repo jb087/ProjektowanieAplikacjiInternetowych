@@ -53,6 +53,9 @@ class TaskElement extends Component {
     onSaveChanges = newTaskValue => {
         let task = this.state.task;
         task.task = newTaskValue;
+
+        //TODO Update task
+
         this.props.addTask(task);
 
         this.setState({

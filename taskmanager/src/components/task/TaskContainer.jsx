@@ -53,6 +53,8 @@ class TaskContainer extends Component {
         const taskElement = document.getElementById(taskElementId);
         taskElement.style.display = "block";
 
+        //TODO update task
+
         this.props.addTask({
             id: taskElementId,
             task: taskElement.innerHTML,
