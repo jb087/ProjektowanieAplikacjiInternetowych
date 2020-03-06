@@ -24,8 +24,12 @@ router.post('/register-user', function (req, res, next) {
     userService.registerUser(res, req.body);
 });
 
-router.put('/save-tasks/:login', function (req, res, next) {
-    userService.saveTasks(res, req.params.login, req.body);
+router.put('/save-task/:login', function (req, res, next) {
+    userService.saveTask(res, req.params.login, req.body);
+});
+
+router.delete('/delete-task/:login/:taskId', function (req, res, next) {
+    userService.deleteTaskById(res, req.params.login, req.params.taskId);
 });
 
 module.exports = router;

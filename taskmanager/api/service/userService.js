@@ -55,56 +55,45 @@ exports.registerUser = (res, requestBody) => {
         });
 };
 
-exports.saveTasks = (res, login, requestBody) => {
+exports.saveTask = (res, login, requestBody) => {
     connection.query("SELECT * FROM USER WHERE UserName = ?", [login], function (err, result, fields) {
         if (err) {
             throw err;
         }
 
-        const user = new User(result[0].ID, result[0].UserName, result[0].Password);
-        const tasks = requestBody.map(task => new Task(task.id, task.task, task.taskContainerId, user.id));
-        connection.query("SELECT * FROM TASK", function (err, result, fields) {
-            if (err) {
-                throw err;
-            }
-
-            const ids = result.map(task => task.ID);
-            const tasksNotInDB = tasks.filter(task => !ids.includes(task.id));
-            const tasksInDB = tasks.filter(task => ids.includes(task.id));
-            if (tasksInDB.length > 0) {
-                tasksInDB.forEach(task => connection.query("DELETE FROM TASK WHERE ID = ?)", [task.id], function (err, result, fields) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    connection.query("INSERT INTO TASK (ID, TaskName, TaskContainerId, UserId) VALUES (?)", tasks, function (err, result, fields) {
-                        if (err) {
-                            throw err;
-                        }
-
-                        res.status(200).json({response: "Tasks was updated successfully!"})
-                    })
-                }));
-            } else {
-                const convertedTasks = tasksNotInDB.reduce((task1, task2) => {
-                    let array = [];
-                    array.push(task2.id);
-                    array.push(task2.taskName);
-                    array.push(task2.taskContainerId);
-                    array.push(task2.userId);
-                    task1.push(array);
-                    return task1;
-                }, []);
-                connection.query("INSERT INTO TASK (ID, TaskName, TaskContainerId, UserId) VALUES (?)", convertedTasks, function (err, result, fields) {
-                    //TODO dodaje tylko jeden task
-
-                    if (err) {
-                        throw err;
-                    }
-
-                    res.status(200).json({response: "New tasks added into database!"});
-                })
-            }
-        })
+        saveTasks(result, requestBody, res);
     });
 };
+
+function saveTasks(result, requestBody, res) {
+    const user = new User(result[0].ID, result[0].UserName, result[0].Password);
+    const task = new Task(requestBody.id, requestBody.task, requestBody.taskContainerId, user.id);
+    connection.query("INSERT INTO TASK (ID, TaskName, TaskContainerId, UserId) VALUES (?)", [[task.id, task.taskName, task.taskContainerId, task.userId]], function (err, result, fields) {
+        if (err) {
+            throw err;
+        }
+
+        res.status(200).json({response: true});
+    });
+}
+
+exports.deleteTaskById = (res, login, taskId) => {
+    connection.query("SELECT * FROM USER WHERE UserName = ?", [login], function (err, result, fields) {
+        if (err) {
+            throw err;
+        }
+
+        deleteTaskById(taskId, result, res);
+    });
+};
+
+function deleteTaskById(taskId, result, res) {
+    connection.query("DELETE FROM TASK WHERE (ID) = (?) AND (UserId) = ?", [taskId, result[0].ID], function (err, result, fieldId) {
+        if (err) {
+            console.log(err.sql);
+            throw err;
+        }
+
+        res.status(200).json({response: true});
+    })
+}
