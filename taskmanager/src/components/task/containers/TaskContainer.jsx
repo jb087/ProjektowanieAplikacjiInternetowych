@@ -1,5 +1,4 @@
 import React, {Component} from "react"
-import TaskForm from "../form/TaskForm";
 import TaskElement from "../element/TaskElement";
 import ApiClient from "../../../client/ApiClient";
 import "./TaskContainers.css"
@@ -26,15 +25,6 @@ class TaskContainer extends Component {
                                 addTask={this.props.addTask}
                                 removeTask={this.props.removeTask}
                             />)
-                }
-                {
-                    this.props.formTaskHidden === "false" &&
-                    <TaskForm
-                        taskContainerId={this.props.id}
-                        onSubmit={this.props.addTask}
-                        hidden={this.props.formTaskHidden}
-                        login={this.props.login}
-                    />
                 }
             </div>
         );

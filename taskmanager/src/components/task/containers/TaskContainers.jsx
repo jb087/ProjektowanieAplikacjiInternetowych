@@ -3,13 +3,14 @@ import TaskContainer from "./TaskContainer";
 import ApiClient from "../../../client/ApiClient";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import "./TaskContainers.css"
+import TaskForm from "../form/TaskForm";
 
 class TaskContainers extends Component {
 
     state = {
         taskContainers: [
-            {id: "todoTasksId", order: 1, title: "ToDo Tasks", formTaskHidden: "false"},
-            {id: "doneTasksId", order: 2, title: "Done Tasks", formTaskHidden: "true"}
+            {id: "todoTasksId", order: 1, title: "ToDo Tasks"},
+            {id: "doneTasksId", order: 2, title: "Done Tasks"}
         ],
         tasks: []
     };
@@ -27,7 +28,6 @@ class TaskContainers extends Component {
                                             <TaskContainer
                                                 id={taskContainer.id}
                                                 title={taskContainer.title}
-                                                formTaskHidden={taskContainer.formTaskHidden}
                                                 tasks={this.state.tasks}
                                                 addTask={this.addTask}
                                                 removeTask={this.removeTask}
@@ -45,6 +45,11 @@ class TaskContainers extends Component {
                                     Logout
                                 </Button>
                             </div>
+                            <TaskForm
+                                taskContainerId="todoTasksId"
+                                onSubmit={this.addTask}
+                                login={this.props.match.params.login}
+                            />
                         </Col>
                     </Row>
                 </Container>
