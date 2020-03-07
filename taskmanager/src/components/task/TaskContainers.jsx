@@ -43,6 +43,11 @@ class TaskContainers extends Component {
         );
     }
 
+    async componentDidMount() {
+        const tasks = await ApiClient.getTasks(this.props.match.params.login);
+        this.setState({tasks: tasks});
+    }
+
     compareTaskContainers = (a, b) => {
         if (a.order < b.order) {
             return -1;

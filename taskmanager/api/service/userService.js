@@ -119,3 +119,24 @@ function updateTask(res, userId, requestBody) {
             res.status(200).json({response: true});
         });
 }
+
+exports.getTasks = (res, login) => {
+    connection.query("SELECT * FROM USER WHERE UserName = ?", [login], function (err, result, fields) {
+        if (err) {
+            throw err;
+        }
+
+        getTasks(res, result[0].ID);
+    });
+};
+
+function getTasks(res, userId) {
+    connection.query("SELECT * FROM TASK WHERE UserId = ?", [userId], function (err, result, fields) {
+        if (err) {
+            throw err;
+        }
+
+        const tasks = result.map(task => Task.viewTask(task.ID, task.TaskName, task.TaskContainerId, task.UserId));
+        res.status(200).json({response: tasks});
+    });
+}

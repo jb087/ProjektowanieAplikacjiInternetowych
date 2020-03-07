@@ -36,4 +36,8 @@ router.put('/update-task/:login', function (req, res, next) {
     userService.updateTask(res, req.params.login, req.body);
 });
 
+router.get('/get-tasks/:login', function (req, res, next) {
+    userService.getTasks(res, req.params.login);
+});
+
 module.exports = router;
