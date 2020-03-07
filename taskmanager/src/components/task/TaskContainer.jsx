@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import TaskForm from "./TaskForm";
 import TaskElement from "./TaskElement";
+import ApiClient from "../../client/ApiClient";
 
 class TaskContainer extends Component {
 
@@ -54,13 +55,15 @@ class TaskContainer extends Component {
         const taskElement = document.getElementById(taskElementId);
         taskElement.style.display = "block";
 
-        //TODO update task
-
-        this.props.addTask({
+        const task = {
             id: taskElementId,
             task: taskElement.innerHTML,
             taskContainerId: this.props.id
-        })
+        };
+
+        ApiClient.updateTask(this.props.login, task);
+
+        this.props.addTask(task);
     };
 
     dragOver = event => {
