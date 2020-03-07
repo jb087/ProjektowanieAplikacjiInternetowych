@@ -26,27 +26,29 @@ class UserForm extends Component {
                         Back
                     </Button>
                 </div>
-                <SimpleAlert
-                    show={this.state.showUserExistAlert}
-                    type={"danger"}
-                    closeFunction={this.closeUserExistAlert}
-                    text={"Provided user exists! Please provide unique username."}
-                    dismissible
-                />
-                <SimpleAlert
-                    show={this.state.showIncorrectDataAlert}
-                    type={"danger"}
-                    closeFunction={this.closeIncorrectDataAlert}
-                    text={"Provided data are incorrect! Please provide correct data."}
-                    dismissible
-                />
-                <SimpleAlert
-                    show={this.state.showUserRegisteredAlert}
-                    type={"success"}
-                    closeFunction={this.closeUserRegisteredAlert}
-                    text={"User registered successfully."}
-                    dismissible
-                />
+                <div className="Alerts">
+                    <SimpleAlert
+                        show={this.state.showUserExistAlert}
+                        type={"danger"}
+                        closeFunction={this.closeUserExistAlert}
+                        text={"Provided user exists! Please provide unique username."}
+                        dismissible
+                    />
+                    <SimpleAlert
+                        show={this.state.showIncorrectDataAlert}
+                        type={"danger"}
+                        closeFunction={this.closeIncorrectDataAlert}
+                        text={"Provided data are incorrect! Please provide correct data."}
+                        dismissible
+                    />
+                    <SimpleAlert
+                        show={this.state.showUserRegisteredAlert}
+                        type={"success"}
+                        closeFunction={this.closeUserRegisteredAlert}
+                        text={"User registered successfully."}
+                        dismissible
+                    />
+                </div>
                 <div className="UserForm">
                     {
                         this.isLoginForm(this.props.location.pathname) ?
