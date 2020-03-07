@@ -32,6 +32,8 @@ router.delete('/delete-task/:login/:taskId', function (req, res, next) {
     userService.deleteTaskById(res, req.params.login, req.params.taskId);
 });
 
-//TODO update task
+router.put('/update-task/:login', function (req, res, next) {
+    userService.updateTask(res, req.params.login, req.body);
+});
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import Button from "react-bootstrap/Button";
 import TaskModalEditor from "./TaskModalEditor";
+import ApiClient from "../../client/ApiClient";
 
 class TaskElement extends Component {
 
@@ -54,7 +55,7 @@ class TaskElement extends Component {
         let task = this.state.task;
         task.task = newTaskValue;
 
-        //TODO Update task
+        ApiClient.updateTask(this.props.login, task);
 
         this.props.addTask(task);
 

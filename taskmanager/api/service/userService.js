@@ -97,3 +97,25 @@ function deleteTaskById(taskId, result, res) {
         res.status(200).json({response: true});
     })
 }
+
+exports.updateTask = (res, login, requestBody) => {
+    connection.query("SELECT * FROM USER WHERE UserName = ?", [login], function (err, result, fields) {
+        if (err) {
+            throw err;
+        }
+
+        updateTask(res, result[0].ID, requestBody);
+    });
+};
+
+function updateTask(res, userId, requestBody) {
+    const task = new Task(requestBody.id, requestBody.task, requestBody.taskContainerId, userId);
+    connection.query("UPDATE TASK SET TaskName = ?, TaskContainerId = ? WHERE ID = ? AND UserId = ?",
+        [task.taskName, task.taskContainerId, task.id, task.userId], function (err, result, fields) {
+            if (err) {
+                throw err;
+            }
+
+            res.status(200).json({response: true});
+        });
+}

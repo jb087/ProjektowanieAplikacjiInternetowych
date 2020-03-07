@@ -3,8 +3,9 @@ const apiPath = host + "api/";
 const checkUserPath = apiPath + "check-user/";
 const userExistsPath = apiPath + "user-exists/";
 const registerUserPath = apiPath + "register-user/";
-const saveTasks = apiPath + "save-task/{login}";
+const saveTask = apiPath + "save-task/{login}";
 const deleteTaskById = apiPath + "delete-task/{login}/{taskId}";
+const updateTask = apiPath + "update-task/{login}";
 
 class ApiClient {
 
@@ -39,7 +40,7 @@ class ApiClient {
     }
 
     static async saveTasks(login, task) {
-        return fetch(saveTasks.replace("{login}", login), {
+        return fetch(saveTask.replace("{login}", login), {
             method: "PUT",
             body: JSON.stringify(task),
             headers: {"Content-Type": "application/json"}
@@ -49,6 +50,14 @@ class ApiClient {
     static async deleteTaskById(login, taskId) {
         return fetch(deleteTaskById.replace("{login}", login).replace("{taskId}", taskId), {
             method: "DELETE",
+            headers: {"Content-Type": "application/json"}
+        })
+    }
+
+    static updateTask(login, task) {
+        return fetch(updateTask.replace("{login}", login), {
+            method: "PUT",
+            body: JSON.stringify(task),
             headers: {"Content-Type": "application/json"}
         })
     }
