@@ -1,0 +1,19 @@
+.TaskContainers {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    transform: translate(-20%);
+}
+
+.Logout {
+    position: absolute;
+    top: 3%;
+    right: 10%;
+}
+
+.TaskContainer h1 {
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 500;
+}

@@ -3,7 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import {v1 as uuidv1} from "uuid"
-import ApiClient from "../../client/ApiClient";
+import ApiClient from "../../../client/ApiClient";
+import "./TaskForm.css";
 
 class TaskForm extends Component {
 
@@ -13,10 +14,11 @@ class TaskForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className="TaskForm">
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group as={Col} md="8" controlId="validation1">
                         <Form.Control
+                            className="Input"
                             required
                             name="task"
                             type="text"
@@ -24,7 +26,12 @@ class TaskForm extends Component {
                             placeholder="Task"
                             onChange={this.handleChange}
                         />
-                        <Button type="submit">Add task</Button>
+                        <Button
+                            className="SubmitButton"
+                            type="submit"
+                        >
+                            Add task
+                        </Button>
                     </Form.Group>
                 </Form>
             </div>

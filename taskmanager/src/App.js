@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import LoginRegistryMenu from "./components/login/login/registy/menu/LoginRegistryMenu";
 import UserForm from "./components/login/login/registy/form/UserForm";
 import {Container} from "react-bootstrap";
-import TaskContainers from "./components/task/TaskContainers";
+import TaskContainers from "./components/task/containers/TaskContainers";
 
 
 function App() {

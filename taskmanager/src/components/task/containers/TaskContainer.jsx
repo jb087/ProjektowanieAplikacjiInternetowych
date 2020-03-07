@@ -1,13 +1,15 @@
 import React, {Component} from "react"
-import TaskForm from "./TaskForm";
-import TaskElement from "./TaskElement";
-import ApiClient from "../../client/ApiClient";
+import TaskForm from "../form/TaskForm";
+import TaskElement from "../element/TaskElement";
+import ApiClient from "../../../client/ApiClient";
+import "./TaskContainers.css"
 
 class TaskContainer extends Component {
 
     render() {
         return (
             <div
+                className="TaskContainer"
                 onDrop={this.drop}
                 onDragOver={this.dragOver}
             >

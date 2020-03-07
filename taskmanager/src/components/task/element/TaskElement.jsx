@@ -1,7 +1,8 @@
 import React, {Component} from "react"
 import Button from "react-bootstrap/Button";
 import TaskModalEditor from "./TaskModalEditor";
-import ApiClient from "../../client/ApiClient";
+import ApiClient from "../../../client/ApiClient";
+import "./TaskElement.css"
 
 class TaskElement extends Component {
 
@@ -13,18 +14,26 @@ class TaskElement extends Component {
     render() {
         return (
             <div
+                className="TaskElement"
                 onDragStart={this.dragStart}
                 onDragOver={this.dragOver}
                 draggable={true}
             >
                 <p id={this.state.task.id}>{this.state.task.task}</p>
                 <Button
+                    className="Button"
                     variant="outline-danger"
                     onClick={() => this.props.removeTask(this.state.task.id)}
                 >
                     Delete
                 </Button>
-                <Button variant="outline-primary" onClick={this.handleShow}>Edit</Button>
+                <Button
+                    className="Button"
+                    variant="outline-primary"
+                    onClick={this.handleShow}
+                >
+                    Edit
+                </Button>
                 <TaskModalEditor
                     showModal={this.state.showModal}
                     handleClose={this.handleClose}

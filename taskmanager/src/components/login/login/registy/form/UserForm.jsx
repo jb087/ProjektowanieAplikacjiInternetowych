@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ApiClient from "../../../../../client/ApiClient";
-import SimpleAlert from "../../../SimpleAlert";
+import SimpleAlert from "./SimpleAlert";
 import "./UserForm.css";
 
 class UserForm extends Component {

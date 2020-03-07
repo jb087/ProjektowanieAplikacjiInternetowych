@@ -1,10 +1,8 @@
 import React, {Component} from "react"
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import TaskContainer from "./TaskContainer";
-import Container from "react-bootstrap/Container";
-import ApiClient from "../../client/ApiClient";
-import {Button} from "react-bootstrap";
+import ApiClient from "../../../client/ApiClient";
+import {Button, Col, Container, Row} from "react-bootstrap";
+import "./TaskContainers.css"
 
 class TaskContainers extends Component {
 
@@ -18,11 +16,28 @@ class TaskContainers extends Component {
 
     render() {
         return (
-            <div>
+            <div className="TaskContainers">
                 <Container>
                     <Row>
+                        {
+                            this.state.taskContainers
+                                .sort((a, b) => this.compareTaskContainers(a, b))
+                                .map(taskContainer =>
+                                        <Col key={taskContainer.id}>
+                                            <TaskContainer
+                                                id={taskContainer.id}
+                                                title={taskContainer.title}
+                                                formTaskHidden={taskContainer.formTaskHidden}
+                                                tasks={this.state.tasks}
+                                                addTask={this.addTask}
+                                                removeTask={this.removeTask}
+                                                login={this.props.match.params.login}
+                                            />
+                                        </Col>
+                                )
+                        }
                         <Col>
-                            <div>
+                            <div className="Logout">
                                 <Button
                                     variant="danger"
                                     onClick={this.logout}
@@ -31,25 +46,6 @@ class TaskContainers extends Component {
                                 </Button>
                             </div>
                         </Col>
-                    </Row>
-                    <Row>
-                        {
-                            this.state.taskContainers
-                                .sort((a, b) => this.compareTaskContainers(a, b))
-                                .map(taskContainer =>
-                                    <Col key={taskContainer.id}>
-                                        <TaskContainer
-                                            id={taskContainer.id}
-                                            title={taskContainer.title}
-                                            formTaskHidden={taskContainer.formTaskHidden}
-                                            tasks={this.state.tasks}
-                                            addTask={this.addTask}
-                                            removeTask={this.removeTask}
-                                            login={this.props.match.params.login}
-                                        />
-                                    </Col>
-                                )
-                        }
                     </Row>
                 </Container>
             </div>
