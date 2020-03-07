@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import TaskContainer from "./TaskContainer";
 import Container from "react-bootstrap/Container";
 import ApiClient from "../../client/ApiClient";
+import {Button} from "react-bootstrap";
 
 class TaskContainers extends Component {
 
@@ -19,6 +20,18 @@ class TaskContainers extends Component {
         return (
             <div>
                 <Container>
+                    <Row>
+                        <Col>
+                            <div>
+                                <Button
+                                    variant="danger"
+                                    onClick={this.logout}
+                                >
+                                    Logout
+                                </Button>
+                            </div>
+                        </Col>
+                    </Row>
                     <Row>
                         {
                             this.state.taskContainers
@@ -47,6 +60,10 @@ class TaskContainers extends Component {
         const tasks = await ApiClient.getTasks(this.props.match.params.login);
         this.setState({tasks: tasks});
     }
+
+    logout = () => {
+        this.props.history.push("/");
+    };
 
     compareTaskContainers = (a, b) => {
         if (a.order < b.order) {

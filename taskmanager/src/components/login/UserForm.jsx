@@ -17,58 +17,76 @@ class UserForm extends Component {
 
     render() {
         return (
-            <Row>
-                <Col></Col>
-                <Col>
-                    <SimpleAlert
-                        show={this.state.showUserExistAlert}
-                        type={"danger"}
-                        closeFunction={this.closeUserExistAlert}
-                        text={"Provided user exists! Please provide unique username."}
-                        dismissible
-                    />
-                    <SimpleAlert
-                        show={this.state.showIncorrectDataAlert}
-                        type={"danger"}
-                        closeFunction={this.closeIncorrectDataAlert}
-                        text={"Provided data are incorrect! Please provide correct data."}
-                        dismissible
-                    />
-                    <SimpleAlert
-                        show={this.state.showUserRegisteredAlert}
-                        type={"success"}
-                        closeFunction={this.closeUserRegisteredAlert}
-                        text={"User registered successfully."}
-                        dismissible
-                    />
-                    <Form onSubmit={this.handleSubmit}>
-                        <Form.Group>
-                            <Form.Control
-                                required
-                                id="loginId"
-                                name="login"
-                                type="text"
-                                value={this.state.login}
-                                placeholder="Login"
-                                onChange={this.handleChange}
-                            />
-                            <Form.Control
-                                required
-                                id="passwordId"
-                                name="password"
-                                type="password"
-                                value={this.state.password}
-                                placeholder="Password"
-                                onChange={this.handleChange}
-                            />
-                            <Button type="submit">Login</Button>
-                        </Form.Group>
-                    </Form>
-                </Col>
-                <Col></Col>
-            </Row>
+            <div>
+                <Row>
+                    <Col>
+                        <div>
+                            <Button
+                                variant="danger"
+                                onClick={this.back}
+                            >
+                                Back
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col></Col>
+                    <Col>
+                        <SimpleAlert
+                            show={this.state.showUserExistAlert}
+                            type={"danger"}
+                            closeFunction={this.closeUserExistAlert}
+                            text={"Provided user exists! Please provide unique username."}
+                            dismissible
+                        />
+                        <SimpleAlert
+                            show={this.state.showIncorrectDataAlert}
+                            type={"danger"}
+                            closeFunction={this.closeIncorrectDataAlert}
+                            text={"Provided data are incorrect! Please provide correct data."}
+                            dismissible
+                        />
+                        <SimpleAlert
+                            show={this.state.showUserRegisteredAlert}
+                            type={"success"}
+                            closeFunction={this.closeUserRegisteredAlert}
+                            text={"User registered successfully."}
+                            dismissible
+                        />
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Group>
+                                <Form.Control
+                                    required
+                                    id="loginId"
+                                    name="login"
+                                    type="text"
+                                    value={this.state.login}
+                                    placeholder="Login"
+                                    onChange={this.handleChange}
+                                />
+                                <Form.Control
+                                    required
+                                    id="passwordId"
+                                    name="password"
+                                    type="password"
+                                    value={this.state.password}
+                                    placeholder="Password"
+                                    onChange={this.handleChange}
+                                />
+                                <Button type="submit">Login</Button>
+                            </Form.Group>
+                        </Form>
+                    </Col>
+                    <Col></Col>
+                </Row>
+            </div>
         );
     }
+
+    back = () => {
+        this.props.history.push("/");
+    };
 
     closeUserExistAlert = () => {
         this.setState({showUserExistAlert: false});
